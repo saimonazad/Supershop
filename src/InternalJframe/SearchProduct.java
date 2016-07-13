@@ -19,6 +19,7 @@ public class SearchProduct extends javax.swing.JInternalFrame {
     /**
      * Creates new form SearchProduct
      */
+    String SearchMethod=null;
     Connection conn=null;
     PreparedStatement pst=null;
     ResultSet rs=null;
@@ -36,10 +37,13 @@ public class SearchProduct extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup3 = new javax.swing.ButtonGroup();
         jScrollPane1 = new javax.swing.JScrollPane();
         Search_Table = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         txt_search = new javax.swing.JTextField();
+        jRadioButton3 = new javax.swing.JRadioButton();
+        jRadioButton4 = new javax.swing.JRadioButton();
 
         setClosable(true);
         setIconifiable(true);
@@ -68,21 +72,38 @@ public class SearchProduct extends javax.swing.JInternalFrame {
             }
         });
 
+        buttonGroup3.add(jRadioButton3);
+        jRadioButton3.setText("Product ID");
+        jRadioButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButton3ActionPerformed(evt);
+            }
+        });
+
+        buttonGroup3.add(jRadioButton4);
+        jRadioButton4.setText("Product Name");
+        jRadioButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButton4ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1340, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
+                .addGap(152, 152, 152)
+                .addComponent(jLabel1)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(138, 138, 138)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(152, 152, 152)
-                        .addComponent(jLabel1)
+                        .addComponent(jRadioButton3)
                         .addGap(18, 18, 18)
-                        .addComponent(txt_search, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(243, Short.MAX_VALUE))
+                        .addComponent(jRadioButton4))
+                    .addComponent(txt_search, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -91,7 +112,11 @@ public class SearchProduct extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(txt_search, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 82, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jRadioButton3)
+                    .addComponent(jRadioButton4))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 304, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -100,24 +125,60 @@ public class SearchProduct extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void txt_searchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_searchKeyReleased
-        // TODO add your handling code here:
-        try {
-            String sql="select *from PRODUCT,STOCK where ProductID=?";
+        // search via id
+        if (SearchMethod=="ID") {
+            try {
+            String sql="select PRODUCT.ProductID,PRODUCT.ProductTitle,PRODUCT.ProductBrand,PRODUCT.SubCategoryID,STOCK.Quantity,STOCK.PurchasePrice,STOCK.SellPrice,STOCK.PurchaseNo,STOCK.BarcodeNo,STOCK.EmployeeID,STOCK.SupplierID,STOCK.ManufactureDate,STOCK.ExpDate from PRODUCT inner join  STOCK on PRODUCT.ProductID=STOCK.ProductID where PRODUCT.ProductID=?";
             pst=conn.prepareStatement(sql);
             pst.setString(1, txt_search.getText());
             rs=pst.executeQuery();
-            if(rs.next())
-            {
-                Search_Table.setModel(DbUtils.resultSetToTableModel(rs));
-            }
+            Search_Table.setModel(DbUtils.resultSetToTableModel(rs));
         } catch (Exception e) {
         }
+        }
+        else if(SearchMethod=="Name")
+        {
+            try {
+            String sql="select PRODUCT.ProductID,PRODUCT.ProductTitle,PRODUCT.ProductBrand,PRODUCT.SubCategoryID,STOCK.Quantity,STOCK.PurchasePrice,STOCK.SellPrice,STOCK.PurchaseNo,STOCK.BarcodeNo,STOCK.EmployeeID,STOCK.SupplierID,STOCK.ManufactureDate,STOCK.ExpDate from PRODUCT inner join  STOCK on PRODUCT.ProductID=STOCK.ProductID where PRODUCT.ProductTitle=?";
+            pst=conn.prepareStatement(sql);
+            pst.setString(1, txt_search.getText());
+            rs=pst.executeQuery();
+            Search_Table.setModel(DbUtils.resultSetToTableModel(rs));
+        } catch (Exception e) {
+        }
+        }
+        
+        //search via product name
+       /* */
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
     }//GEN-LAST:event_txt_searchKeyReleased
+
+    private void jRadioButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton3ActionPerformed
+        // TODO add your handling code here:
+        SearchMethod="ID";
+    }//GEN-LAST:event_jRadioButton3ActionPerformed
+
+    private void jRadioButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton4ActionPerformed
+        // TODO add your handling code here:
+        SearchMethod="Name";
+    }//GEN-LAST:event_jRadioButton4ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JTable Search_Table;
+    public javax.swing.ButtonGroup buttonGroup3;
     public javax.swing.JLabel jLabel1;
+    public javax.swing.JRadioButton jRadioButton3;
+    public javax.swing.JRadioButton jRadioButton4;
     public javax.swing.JScrollPane jScrollPane1;
     public javax.swing.JTextField txt_search;
     // End of variables declaration//GEN-END:variables
