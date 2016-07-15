@@ -1,5 +1,11 @@
 package MainFrame;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import javax.swing.table.DefaultTableModel;
+import net.proteanit.sql.DbUtils;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -12,15 +18,58 @@ package MainFrame;
  */
 public class TableDB extends javax.swing.JFrame {
 
+    Connection conn=null;
+    ResultSet rs=null;
+    PreparedStatement pst=null;
     /**
      * Creates new form TableDB
      */
     public TableDB() {
         initComponents();
+        conn=javaconnect.ConnecrDb();
+        update_Table();
+        Data_Table();
     }
+    
     public void update_Table()
     {
-        
+        try {
+            String sql="SELECT * FROM PRODUCT";
+            pst=conn.prepareStatement(sql);
+            rs=pst.executeQuery();
+            Table.setModel(DbUtils.resultSetToTableModel(rs));
+        } catch (Exception e) {
+        }
+    }
+    public void Data_Table()
+    {
+        try {
+            int row=Table.getRowCount();
+            int col=Table.getColumnCount();
+            for (int i = 0;  i< row; i++) {
+                for (int j = 0;  j< col; j++) {
+                DefaultTableModel dtm=(DefaultTableModel)Table.getModel();
+                String s1=dtm.getValueAt(i, j).toString();
+                    if (j==0) {
+                        System.err.println("Col 1  "+s1);
+                    }
+                    else if(j==1)
+                    {
+                        System.err.println("Col 2"+s1);
+                    }
+                    else if(j==2)
+                    {
+                        System.err.println("Col 3"+s1);
+                    }
+                    else if(j==3)
+                    {
+                        System.err.println("Col 4"+s1);
+                    }
+                    
+            }
+            }
+        } catch (Exception e) {
+        }
     }
 
     /**
@@ -54,17 +103,17 @@ public class TableDB extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(58, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(50, 50, 50)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(42, 42, 42))
+                .addContainerGap(50, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(21, 21, 21)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(56, 56, 56)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(227, Short.MAX_VALUE))
         );
 
         pack();

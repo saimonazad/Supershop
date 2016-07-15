@@ -14,7 +14,7 @@ package MainFrame;
 
 import InternalJframe.NewJInternalFrame;
 import InternalJframe.SearchProduct;
-
+import InternalJframe.*;
 import java.awt.Toolkit;
 import java.awt.*;
 import javax.swing.JTabbedPane;
@@ -50,13 +50,9 @@ public class NewJFrame extends javax.swing.JFrame {
         jPanel4 = new javax.swing.JPanel();
         jButton5 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
-        jTabbedPane1 = new javax.swing.JTabbedPane();
-        jTabbedPane3 = new javax.swing.JTabbedPane();
-        jTabbedPane4 = new javax.swing.JTabbedPane();
-        jTabbedPane5 = new javax.swing.JTabbedPane();
-        jTabbedPane6 = new javax.swing.JTabbedPane();
-        jTabbedPane7 = new javax.swing.JTabbedPane();
-        jTabbedPane8 = new javax.swing.JTabbedPane();
+        jToolBar1 = new javax.swing.JToolBar();
+        jButton4 = new javax.swing.JButton();
+        jButton7 = new javax.swing.JButton();
         Desktop = new javax.swing.JDesktopPane();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -166,20 +162,39 @@ public class NewJFrame extends javax.swing.JFrame {
 
         jTabbedPane2.addTab("Inventory", jToolBar2);
 
-        jTabbedPane1.setMinimumSize(new java.awt.Dimension(1366, 5));
-        jTabbedPane2.addTab("Sakes", jTabbedPane1);
-        jTabbedPane2.addTab("Purchases", jTabbedPane3);
-        jTabbedPane2.addTab("Employee", jTabbedPane4);
-        jTabbedPane2.addTab("Accounting", jTabbedPane5);
-        jTabbedPane2.addTab("Reports", jTabbedPane6);
-        jTabbedPane2.addTab("Options", jTabbedPane7);
-        jTabbedPane2.addTab("Help", jTabbedPane8);
+        jToolBar1.setRollover(true);
+
+        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/asset/NewSales.png"))); // NOI18N
+        jButton4.setText("New Sales");
+        jButton4.setFocusable(false);
+        jButton4.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButton4.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(jButton4);
+
+        jButton7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/asset/inv32.png"))); // NOI18N
+        jButton7.setText("Inventory Items");
+        jButton7.setFocusable(false);
+        jButton7.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButton7.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton7ActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(jButton7);
+
+        jTabbedPane2.addTab("Sales", jToolBar1);
 
         javax.swing.GroupLayout DesktopLayout = new javax.swing.GroupLayout(Desktop);
         Desktop.setLayout(DesktopLayout);
         DesktopLayout.setHorizontalGroup(
             DesktopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 1366, Short.MAX_VALUE)
         );
         DesktopLayout.setVerticalGroup(
             DesktopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -193,7 +208,7 @@ public class NewJFrame extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(Desktop)
-                    .addComponent(jTabbedPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 1366, Short.MAX_VALUE))
+                    .addComponent(jTabbedPane2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -207,41 +222,56 @@ public class NewJFrame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         // TODO add your handling code here:
-        NewJInternalFrame f =new NewJInternalFrame();
-       
-       Desktop.add(f);
-       f.show();
-        try {
-            f.setSelected(true);
-        } catch (java.beans.PropertyVetoException e) {
-        }
-        
-        
-    }//GEN-LAST:event_jButton3ActionPerformed
-
-    private void SearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SearchActionPerformed
-        // TODO add your handling code here:
-        SearchProduct f =new SearchProduct();
-       
-       Desktop.add(f);
-       f.show();
-        try {
-            f.setSelected(true);
-        } catch (java.beans.PropertyVetoException e) {
-        }
-        
-        
-    }//GEN-LAST:event_SearchActionPerformed
+    }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton5ActionPerformed
 
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+    private void SearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SearchActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton6ActionPerformed
+        SearchProduct f =new SearchProduct();
+
+        Desktop.add(f);
+        f.show();
+        try {
+            f.setSelected(true);
+        } catch (java.beans.PropertyVetoException e) {
+        }
+
+    }//GEN-LAST:event_SearchActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        NewJInternalFrame f =new NewJInternalFrame();
+
+        Desktop.add(f);
+        f.show();
+        try {
+            f.setSelected(true);
+        } catch (java.beans.PropertyVetoException e) {
+        }
+
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+        SaleProduct f =new SaleProduct();
+
+        Desktop.add(f);
+        f.show();
+        try {
+            f.setSelected(true);
+        } catch (java.beans.PropertyVetoException e) {
+        }
+        
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton7ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -287,18 +317,14 @@ public class NewJFrame extends javax.swing.JFrame {
     private javax.swing.JDesktopPane Desktop;
     private javax.swing.JButton Search;
     private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
+    private javax.swing.JButton jButton7;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTabbedPane jTabbedPane2;
-    private javax.swing.JTabbedPane jTabbedPane3;
-    private javax.swing.JTabbedPane jTabbedPane4;
-    private javax.swing.JTabbedPane jTabbedPane5;
-    private javax.swing.JTabbedPane jTabbedPane6;
-    private javax.swing.JTabbedPane jTabbedPane7;
-    private javax.swing.JTabbedPane jTabbedPane8;
+    private javax.swing.JToolBar jToolBar1;
     private javax.swing.JToolBar jToolBar2;
     // End of variables declaration//GEN-END:variables
 }
