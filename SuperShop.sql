@@ -61,7 +61,7 @@ MemberID int foreign key references MEMBER(MemberID),
 )
 create table STOCK
 (
-ProductID int foreign key references PRODUCT(ProductID),
+ProductID int foreign key references PRODUCT(ProductID) on update cascade,
 LotNo int not null,
 PRIMARY KEY(ProductID,LotNo),
 Quantity varchar(50) not null,
@@ -72,5 +72,6 @@ SellPrice float not null,
 ManufactureDate date not null,
 ExpDate date not null,
 EmployeeID int foreign key references EMPLOYEE(EmployeeID),
+PurchasePrice float not null,
 )
 
